@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>每个人都能创造</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="assets/css/headers/header-v3.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/animate.css">
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/revolution-slider/rs-plugin/css/settings.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+    
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/player.css">
+    <link rel="stylesheet" href="assets/css/compare.css">
+
+    <script src=http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js></script>
+    <script src=http://ajax.useso.com/ajax/libs/swfobject/2.2/swfobject.js></script>
+
+
+    <script>
+      $(document).ready(function() {
+        var project_id = location.hash && parseInt(location.hash.substr(1)) || 23413051;
+        var scratch = new Scratch(project_id);
+      });
+    </script>
+
+    <script>
+        var flashLog = null;
+        var project_id = location.hash && parseInt(location.hash.substr(1)) || 23413051;
+        $(function() {
+            // The flashvars tell flash about the project data (and autostart=true)
+            var flashvars = {
+                server: encodeURIComponent('scratch.mit.edu'),
+                debugOps: true,
+                debugOpCmd: 'debugFlash',
+                project_title: '',
+                project_id: project_id
+            };
+
+            var params = {
+                allowscriptaccess: 'always',
+                allowfullscreen: 'false',
+                wmode: 'direct',
+                menu: 'false'
+            };
+
+            var flashPlayer = null;
+            var swf_url = "http://cdn.scratch.mit.edu/scratchr2/static/Scratch.swf?brkCache="+project_id;
+            swfobject.embedSWF(swf_url, "flash-scratch", "482", "402", "10.2.0",
+                "http://cdn.scratch.mit.edu/scratchr2/static/expressInstall.swfobject",
+                flashvars, params, null, function(e) {
+                    $('#flash-scratch').css('visibility', 'visible');
+                    if (e.success) flashPlayer = e.ref;
+                });
+
+            $('#trigger-green-flag, #overlay').click(function() {
+                flashPlayer.ASstartRunning();
+            });
+
+            // Stop button behavior
+            $('#trigger-stop').click(function() {
+                flashPlayer.ASstopRunning();
+            });
+
+            flashLog = $('#flash-debug');
+            var jsLog = $('#js-debug');
+            interp.debugOps = true;
+            interp.debugFunc = function(opCount, opName, args) {
+                var text = opCount + ': ' + opName + '(' + args.join(', ') + ')';
+                jsLog.val(jsLog.val() + text + "\n");
+            };
+
+            // Setup synchronized scrolling
+            flashLog.scroll(function() {
+                jsLog.scrollTop(flashLog.scrollTop());
+            });
+
+            jsLog.scroll(function() {
+                flashLog.scrollTop(jsLog.scrollTop());
+            });
+        });
+
+        function debugFlash(opCount, opName, args) {
+            var text = opCount + ': '+opName+'('+args.join(', ')+')';
+            flashLog.val(flashLog.val() + text + "\n");
+        }
+    </script>
+</head>	
+
+<body>    
+
+<div class="wrapper">
+    <!--=== Header v3 ===-->    
+    <div class="header-v3" style="margin-bottom:-79px">
+        <!-- Navbar -->
+        <div class="navbar navbar-default mega-menu" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img id="logo-header" src="assets/img/logo1-default.png" alt="Logo">
+                    </a>
+                </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+                    <div class="container">
+                        <ul class="nav navbar-nav">
+                            <!-- 在线学习 -->
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" style="color: white">
+                                    在线学习
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <li><a href="javascript:void(0);">编程入门</a></li>
+                                    <li><a href="javascript:void(0);">机器人工作坊</a></li>
+                                    <li><a href="javascript:void(0);">智能坦克</a></li>
+                                </ul>
+                            </li>
+                            <!-- End 在线学习 -->
+
+                            <!-- 教学方案 -->                        
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    教学方案
+                                </a>
+                            </li>
+                            <!-- End 教学方案 -->
+
+                            <!-- Blog -->
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    学生作品
+                                </a>
+                            </li>
+                                
+                            <!-- Features -->
+                            <li class="dropdown active">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    关于
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--=== Slider ===-->
+    <div class="tp-banner-container">
+        <div class="tp-banner">
+            <ul>
+                <!-- SLIDE -->
+                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 1">
+                    <!-- MAIN IMAGE -->
+                    <img src="assets/img/sliders/4.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption revolution-ch1 sft start"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="100"
+                        data-speed="1500"
+                        data-start="500"
+                        data-easing="Back.easeInOut"
+                        data-endeasing="Power1.easeIn"                        
+                        data-endspeed="300">
+                        想象力有多大，能量就有多大
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption revolution-ch2 sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="190"
+                        data-speed="1400"
+                        data-start="2000"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        通过最新的方式学习计算机科学，每个孩子都能创造
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="310"
+                        data-speed="1600"
+                        data-start="2800"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">了解更多</a>
+                    </div>
+                </li>
+                <!-- END SLIDE -->
+
+                <!-- SLIDE -->
+                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 2">
+                    <!-- MAIN IMAGE -->
+                    <img src="assets/img/sliders/2.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption revolution-ch1 sft start"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="100"
+                        data-speed="1500"
+                        data-start="500"
+                        data-easing="Back.easeInOut"
+                        data-endeasing="Power1.easeIn"                        
+                        data-endspeed="300">
+                        编程是如此简单，每个孩子都能做到。
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption revolution-ch2 sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="190"
+                        data-speed="1400"
+                        data-start="2000"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        最新的技术框架使得学习编程变得无比简单 <br/>
+                        
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="310"
+                        data-speed="1600"
+                        data-start="2800"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">了解更多</a>
+                    </div>
+                </li>
+                <!-- END SLIDE -->
+
+                <!-- SLIDE -->
+                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Slide 3">
+                    <!-- MAIN IMAGE -->
+                    <img src="assets/img/sliders/3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption revolution-ch1 sft start"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="100"
+                        data-speed="1500"
+                        data-start="500"
+                        data-easing="Back.easeInOut"
+                        data-endeasing="Power1.easeIn"                        
+                        data-endspeed="300">
+                        美国28个州正在实施的教学方法，此刻你将拥有。
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption revolution-ch2 sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="190"
+                        data-speed="1400"
+                        data-start="2000"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        我们提供全世界最好的青少年计算机科学教学方案
+                    </div>
+
+                    <!-- LAYER -->
+                    <div class="tp-caption sft"
+                        data-x="center"
+                        data-hoffset="0"
+                        data-y="310"
+                        data-speed="1600"
+                        data-start="2800"
+                        data-easing="Power4.easeOut"
+                        data-endspeed="300"
+                        data-endeasing="Power1.easeIn"
+                        data-captionhidden="off"
+                        style="z-index: 6">
+                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">了解更多</a>
+                    </div>
+                </li>
+                <!-- END SLIDE -->
+            </ul>
+            <div class="tp-bannertimer tp-bottom"></div>            
+        </div>
+    </div>
+
+    <div class="purchase">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 animated fadeInLeft">
+                    <span>每个人都能创造</span>
+                    <p>通过最新的方式学习计算机科学，每个孩子都可以创造。</p>
+                </div>            
+                <div class="col-md-3 btn-buy animated fadeInRight">
+                    <a href="#" class="btn-u btn-u-lg"><i class="fa fa-info-circle"></i>了解更多</a>
+                </div>
+            </div>
+        </div>
+    </div><!--/row-->
+
+    <!--=== Content Part ===-->
+        <!-- 方块 -->
+    <div class="bg-image-v2 bg-image-v2-dark parallaxBg1">
+        <div class="container">
+            <div class="col-md-6 col-sm-6">
+                <div class="service-block rounded-2x service-block-light-green">            
+                    <i class="icon-2x color-light fa fa-thumbs-o-up"></i>
+                    <h2 class="heading-md">学生</h2>
+                    <p>学习制作自己的软件/硬件</p>
+                    <p>试用编程工作坊</p>
+                    <p>寻找一个附近的线下课程</p>
+                    <p>其他的线上课程</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="service-block rounded-2x service-block-blue">            
+                    <i class="icon-2x color-light fa fa-globe"></i>
+                    <h2 class="heading-md">教育工作者</h2>
+                    <p>教你的学生</p>
+                    <p>适合小学1-6年级的课程</p>
+                    <p>适合初中7-9年级的课程</p>
+                    <p>了解我们的完整课程体系</p>
+                </div>
+            </div>       
+        </div><!--/container-->
+    </div> 
+
+    <!-- Portfolio Section -->
+        <div class="container content-lg" style="padding-top:50px">
+            <div class="title-v1">
+                <h2>学生作品</h2>
+                <p><strong>点击此处制作你自己的作品</strong></p>                
+            </div>
+
+
+            <div class="cube-portfolio">
+                <div id="filters-container" class="cbp-l-filters-button">
+                    <div data-filter="*" class="cbp-filter-item-active cbp-filter-item"> 所有作品 </div>
+                    <div data-filter=".print" class="cbp-filter-item"> 游戏 </div>
+                    <div data-filter=".web-design" class="cbp-filter-item"> 动画 </div>
+                    <div data-filter=".motion" class="cbp-filter-item"> 机器人 </div>
+                </div><!--/end Filters Container-->
+
+                <div id="grid-container" class="cbp-l-grid-gallery">
+                    <div class="cbp-item print motion">
+                        <a href="assets/ajax/project1.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="World Clock Widget<br>by Paul Flavius Nechita">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/1.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">World Clock Widget</div>
+                                        <div class="cbp-l-caption-desc">by Paul Flavius Nechita</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cbp-item web-design">
+                        <a href="assets/ajax/project2.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="Bolt UI<br>by Tiberiu Neamu">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/2.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">Bolt UI</div>
+                                        <div class="cbp-l-caption-desc">by Tiberiu Neamu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cbp-item print motion">
+                        <a href="assets/ajax/project3.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="WhereTO App<br>by Tiberiu Neamu">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/3.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">WhereTO App</div>
+                                        <div class="cbp-l-caption-desc">by Tiberiu Neamu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cbp-item web-design print">
+                        <a href="assets/ajax/project4.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="iDevices<br>by Tiberiu Neamu">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/11.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">iDevices</div>
+                                        <div class="cbp-l-caption-desc">by Tiberiu Neamu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cbp-item motion">
+                        <a href="assets/ajax/project5.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="Seemple* Music for iPad<br>by Tiberiu Neamu">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/5.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">Seemple* Music for iPad</div>
+                                        <div class="cbp-l-caption-desc">by Tiberiu Neamu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="cbp-item print motion">
+                        <a href="assets/ajax/project6.html" class="cbp-caption cbp-singlePageInline"
+                           data-title="Remind~Me Widget<br>by Tiberiu Neamu">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="assets/img/portfolio/6.jpg" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignLeft">
+                                    <div class="cbp-l-caption-body">
+                                        <div class="cbp-l-caption-title">Remind~Me Widget</div>
+                                        <div class="cbp-l-caption-desc">by Tiberiu Neamu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cbp-l-loadMore-button">
+                    <a href="assets/ajax/loadMore.html" class="cbp-l-loadMore-button-link">LOAD MORE</a>
+                </div>
+            </div>
+        </div>                
+    <!-- End Portfolio Section -->
+
+
+</div><!--/wrapper-->
+
+<!-- JS Global Compulsory -->			
+<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+<!-- JS Customization -->
+<script type="text/javascript" src="assets/js/custom.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/plugins/revolution-slider.js"></script>
+<script type="text/javascript" src="assets/js/plugins/cube-portfolio/cube-portfolio-lightbox.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+      	App.init();
+        RevolutionSlider.initRSfullWidth();
+        });
+</script>
+<!--[if lt IE 9]>
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+<![endif]-->
+<script src=js/util/Timer.js></script>
+<script src=js/util/OffsetBuffer.js></script>
+<script src=js/util/Color.js></script>
+<script src=js/util/Rectangle.js></script>
+<script src=js/Sprite.js></script>
+<script src=js/Reporter.js></script>
+<script src=js/Stage.js></script>
+<script src=js/sound/WAVFile.js></script>
+<script src=js/sound/SoundDecoder.js></script>
+<script src=js/sound/SoundBank.js></script>
+<script src=js/sound/NotePlayer.js></script>
+<script src=soundbank/Instr.js></script>
+<script src=js/IO.js></script>
+<script src=js/primitives/VarListPrims.js></script>
+<script src=js/primitives/MotionAndPenPrims.js></script>
+<script src=js/primitives/LooksPrims.js></script>
+<script src=js/primitives/SensingPrims.js></script>
+<script src=js/primitives/SoundPrims.js></script>
+<script src=js/primitives/Primitives.js></script>
+<script src=js/Interpreter.js></script>
+<script src=js/Runtime.js></script>
+<script src=js/Scratch.js></script>
+</body>
+</html>	

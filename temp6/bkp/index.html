@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>coolKid Player</title>
+
+<!-- iPad properties: set width, disable pinch zoom -->
+<meta name=apple-mobile-web-app-capable content=yes>
+<meta name=viewport content="user-scalable=no, width=540">
+<meta name=apple-mobile-web-app-status-bar-style content=black>
+
+<link rel=stylesheet href=player.css>
+<link rel=stylesheet href=index.css>
+
+<!--script src=http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js></script-->
+
+
+<!--sctipt src=js/jquery.min.js></script-->
+
+<script src=http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var project_id = location.hash && parseInt(location.hash.substr(1)) || 10000160;
+    var scratch = new Scratch(project_id);
+  });
+</script>
+
+<div id=player-container>
+    <div class="arrow vertical" id=up></div>
+    <div class="arrow vertical" id=down></div>
+    <div class="arrow horizontal" id=left></div>
+    <div class="arrow horizontal" id=right></div>
+    <div id=player-header>
+        <div id=player-header-preload></div>
+        <div id=player-header-version>HTML5</div>
+        <button id=toggle-fullscreen tabindex=1></button>
+        <button id=trigger-stop tabindex=3></button>
+        <button id=trigger-green-flag tabindex=2></button>
+    </div>
+    <div id=player-content>
+        <div id=container></div>
+        <div id=overlay></div>
+        <div id=preloader>
+            <div id=preloader-progress><div id=preloader-progress-bar></div></div>
+            <div id=preloader-caption>Loading project&hellip;</div>
+            <div id=preloader-details></div>
+        </div>
+    </div>
+</div>
+
+<div id=project-picker>
+    <span id=address-hint>http://scratch.mit.edu/projects/</span><input id=project-id placeholder=23413051><button id=go-project>&rarr;</button>
+</div>
+
+<h1>hacklab </h1>
+<p>discuss and have fun here! <a href=http://hacklab.thu.io>hacklab</a>.</p>
+
+<h1>coolKid</h1>
+<p> a place for coolKid  <a href=http://thu.io>thu.io</a></p>
+
+<script src=js/util/Timer.js></script>
+<script src=js/util/OffsetBuffer.js></script>
+<script src=js/util/Color.js></script>
+<script src=js/util/Rectangle.js></script>
+<script src=js/Sprite.js></script>
+<script src=js/Reporter.js></script>
+<script src=js/Stage.js></script>
+<script src=js/sound/WAVFile.js></script>
+<script src=js/sound/SoundDecoder.js></script>
+<script src=js/sound/SoundBank.js></script>
+<script src=js/sound/NotePlayer.js></script>
+<script src=soundbank/Instr.js></script>
+<script src=js/IO.js></script>
+<script src=js/primitives/VarListPrims.js></script>
+<script src=js/primitives/MotionAndPenPrims.js></script>
+<script src=js/primitives/LooksPrims.js></script>
+<script src=js/primitives/SensingPrims.js></script>
+<script src=js/primitives/SoundPrims.js></script>
+<script src=js/primitives/Primitives.js></script>
+<script src=js/Interpreter.js></script>
+<script src=js/Runtime.js></script>
+<!-- <script src=js/Scratch.js></script> -->
+<script type="text/JavaScript" src="js/Scratch.js"></script> 
